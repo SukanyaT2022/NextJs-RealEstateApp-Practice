@@ -1,15 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,25 +18,28 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const res = await fetch("/api/login", {
+      const res = await fetch("http://localhost:4000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.message || "Login failed");
-      }
-
-      // Redirect after successful login
-      router.push("/dashboard");
-
+      // if (data.success){
+      //   //below if username and password is correct then redirect to hompage
+      //       router.push('/')
+      // }else{
+      //   setError(data.message)
+      // }
+  (data.success)? router.push('/'): setError(data.message)
+ 
+     
     } catch (err: any) {
       setError(err.message);
+     
     } finally {
       setLoading(false);
     }
@@ -55,13 +59,13 @@ export default function LoginPage() {
 
         <div className="mb-4">
           <label className="block mb-2 text-sm font-medium">
-            Email
+        Username
           </label>
           <input
-            type="email"
+            type="username"
             required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
         </div>

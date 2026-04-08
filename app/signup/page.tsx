@@ -9,6 +9,7 @@ export default function SignupPage() {
   const [form, setForm] = useState({
     firstname: "",
     lastname: "",
+    username: "",
     email: "",
     password: "",
   });
@@ -31,7 +32,7 @@ export default function SignupPage() {
     setSuccess("");
 
     try {
-      const res = await fetch("/api/signup", {
+      const res = await fetch("http://localhost:4000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,6 +94,18 @@ export default function SignupPage() {
             value={form.lastname}
             onChange={handleChange}
             className="p-3 border rounded-lg"
+          />
+        </div>
+
+        <div className="mb-4">
+          <input
+            type="username"
+            name="username"
+            placeholder="Username"
+            required
+            value={form.username}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-lg"
           />
         </div>
 
