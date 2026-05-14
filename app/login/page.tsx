@@ -27,13 +27,13 @@ export default function LoginPage() {
       });
 
       const data = await res.json();
-
-      // if (data.success){
-      //   //below if username and password is correct then redirect to hompage
-      //       router.push('/')
-      // }else{
-      //   setError(data.message)
-      // }
+      
+// how to use session
+      if (data.success){
+        // sessionStorage.setItem("")
+      }else{
+        setError(data.message)
+      }
   (data.success)? router.push('/'): setError(data.message)
  
      

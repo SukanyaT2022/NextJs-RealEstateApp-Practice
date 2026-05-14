@@ -1,5 +1,6 @@
 "use client";
-
+// import { FaUserCircle } from "react-icons/fa";
+import { CircleUser, Link2 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -12,6 +13,7 @@ export default function Navbar() {
     { name: "Home", href: "/" },
     { name: "Login", href: "/login" },
     { name: "Sign Up", href: "/signup" },
+
   ];
 
   return (
@@ -39,6 +41,8 @@ export default function Navbar() {
                 {link.name}
               </Link>
             ))}
+            {/* <FaUserCircle /> */}
+                {<Link href={"setting"}><CircleUser /></Link>}
           </div>
 
           {/* Mobile Button */}
@@ -68,6 +72,7 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
+          
         </div>
       )}
     </nav>
